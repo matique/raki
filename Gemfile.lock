@@ -168,7 +168,7 @@ DEPENDENCIES
   bundler (~> 1)
   crimp
   minitest (~> 5.0)
-  minitest-global_expectations
+  minitest-global_expectations (~> 1)
   observr
   rails
   rake (~> 13)
