@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'helper'
+require 'test_helper'
 
 class RR
   def initialize(*args, &block)

@@ -43,7 +43,7 @@ module Raki
     def fake_parallel(runs)
       return runs.first if runs.size < 2
 
-      app = lambda do |env|
+      lambda do |env|
         status, hsh, body = [200, {}, []]
         runs.shuffle.each { |run|
           s, h, b = run.call(env)

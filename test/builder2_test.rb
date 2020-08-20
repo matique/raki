@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'helper'
+require 'test_helper'
 
 describe Raki::Builder, 'Parallel' do
   def test_builder_collects_hash
@@ -22,6 +22,8 @@ describe Raki::Builder, 'Parallel' do
     end
 
     status, hsh, body = app.call(nil)
+    assert_equal 200, status
+    assert_empty hsh
     assert body.include?('one')
     assert body.include?('two')
   end

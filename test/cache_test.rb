@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'helper'
+require 'test_helper'
 
 # must be tested in a Rails environment
 # Test is somehow faked

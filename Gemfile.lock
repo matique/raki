@@ -159,13 +159,13 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.3.1)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1)
+  bundler
   crimp
   minitest (~> 5.0)
   minitest-global_expectations (~> 1)
@@ -177,4 +177,4 @@ DEPENDENCIES
   simplecov
 
 BUNDLED WITH
-   1.17.3
+   2.1.4

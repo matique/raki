@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'helper'
+require 'test_helper'
 
 describe Raki::Nil do
   let(:raki) { Raki::Nil.new }

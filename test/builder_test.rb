@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'helper'
+require 'test_helper'
 
 describe Raki::Builder do
   let(:raki_nil) { Raki::Nil.new }

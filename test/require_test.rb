@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'helper'
+require 'test_helper'
 
 describe Raki::Require do
   let(:env) { {a: 1, b: 2} }

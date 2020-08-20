@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'helper'
+require 'test_helper'
 
 describe Raki::Lint do
   let(:empty) { [200, {}, []] }
@@ -57,7 +57,7 @@ describe Raki::Lint do
 
  private
   def app_build(result)
-    app = Raki::Builder.app do
+    Raki::Builder.app do
       add Raki::Lint
       run lambda { |env| result }
     end
