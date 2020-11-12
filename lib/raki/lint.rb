@@ -16,11 +16,11 @@ module Raki
       @block&.call(env)
       response = @app.call(env)
 
-      assert('Expected array') { response.class == Array }
+      assert('Expected array') { response.instance_of?(Array) }
       assert('Expected array of 3 items') { response.size == 3 }
-      assert('First item must be an Integer') { response[0].class == Integer }
-      assert('Second item must be a Hash') { response[1].class == Hash }
-      assert('Third item must be an Array') { response[2].class == Array }
+      assert('First item must be an Integer') { response[0].instance_of?(Integer) }
+      assert('Second item must be a Hash') { response[1].instance_of?(Hash) }
+      assert('Third item must be an Array') { response[2].instance_of?(Array) }
 
       response
     end

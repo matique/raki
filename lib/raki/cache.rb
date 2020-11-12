@@ -16,13 +16,11 @@ module Raki
     end
 
    private
-    def kache(key)
+    def kache(key, &block)
       # raise 'Missing Rails environment' unless defined?(Rails.cache)
       return yield unless defined?(Rails.cache)
 
-      Rails.cache.fetch(key, expires_in: 1.hour) {
-        yield
-      }
+      Rails.cache.fetch(key, expires_in: 1.hour, &block)
     end
   end
 end
