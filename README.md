@@ -62,14 +62,14 @@ the application instance itself, or a File-like object.
 Install the gem:
 
 ~~~
-gem install rack-cors
+gem install raki
 ~~~
 
 Or in your Gemfile:
 
 ~~~
 # Gemfile
-gem 'rack-cors'
+gem 'raki'
 ~~~
 
 ## Miscellaneous
