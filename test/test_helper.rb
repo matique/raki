@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-if ENV.delete('COVERAGE')
+if ENV['COVERAGE']
   require 'simplecov'
 
   def SimpleCov.rack_coverage(**opts)
