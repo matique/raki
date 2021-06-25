@@ -2,15 +2,9 @@
 name: Tests
 
 on: [push]
-#on:
-#  push:
-#    branches:
-#    - master
-#  pull_request:
 
 jobs:
   test:
-#    runs-on: ubuntu-latest
     env:
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
@@ -42,6 +36,7 @@ jobs:
         bundle config path /home/runner/bundle
         bundle install
         bundle update
-    - name: Run tests
-      run: |
-        ${{ matrix.test_command }}
+    - run: bundle exec rake
+#    - name: Run tests
+#      run: |
+#        ${{ matrix.test_command }}
