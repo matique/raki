@@ -1,3 +1,4 @@
+# see also https://github.com/whitequark/parser/blob/master/.github/workflows/test.yml
 name: Rake
 
 #on: [push, pull_request]
@@ -18,20 +19,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-#    - uses: actions/cache@v1
-#      with:
-#        path: /home/runner/bundle
-#        key: bundle-${{ matrix.ruby }}-${{ hashFiles('../Gemfile') }}-${{ hashFiles('**/*.gemspec') }}
-#        restore-keys: |
-#          bundle-${{ matrix.ruby }}-
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-#        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Bundle install
       run: |
         bundle config path /home/runner/bundle
         bundle install
         bundle update
-#    - run: bundle exec rake
     - run: ${{ matrix.test_command }}
