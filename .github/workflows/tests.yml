@@ -36,7 +36,6 @@ jobs:
         bundle config path /home/runner/bundle
         bundle install
         bundle update
-    - run: bundle exec rake
-#    - name: Run tests
-#      run: |
-#        ${{ matrix.test_command }}
+    - name: Run tests
+      run: |
+        ${{ matrix.test_command }}
