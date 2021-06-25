@@ -1,33 +1,31 @@
 # adapted from https://github.com/whitequark/parser/blob/master/.github/workflows/test.yml
 name: Tests
 
-on:
-  push:
-    branches:
-    - master
+on: [push]
+#on:
+#  push:
+#    branches:
+#    - master
 #  pull_request:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
     env:
       BUNDLE_JOBS: 4
       BUNDLE_RETRY: 3
       CI: true
-#      TRUFFLERUBYOPT: "--engine.Mode=latency"
     strategy:
       fail-fast: false
       matrix:
+#        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
 #        ruby: ["2.4.10", "2.5.9", "2.6.7", "2.7.3", "3.0.1", "jruby-9.2"]
-        ruby: ["2.7.2", "2.7.3", "3.0.1"]
+#        ruby: ["2.7.2", "2.7.3", "3.0.1"]
+        ruby: ["2.7.2"]
         test_command: ["bundle exec rake test"]
-#        include:
-#          - ruby: "head"
-#            test_command: "bundle exec rake test || true"
-#          - ruby: "truffleruby"
-#            test_command: "bundle exec rake test || true"
-#          - ruby: "3.0.1"
-#            test_command: "./ci/run_rubocop_specs || true"
+    runs-on: ${{ matrix.os }}
+
     steps:
     - uses: actions/checkout@v2
     - uses: actions/cache@v1
