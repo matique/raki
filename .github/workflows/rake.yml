@@ -13,16 +13,17 @@ jobs:
         # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
 #        ruby: [2.5, 2.6, 2.7, '3.0', head, jruby, jruby-head, truffleruby, truffleruby-head]
         ruby: [2.7.2]
+        test_command: ["bundle exec rake test"]
     runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/cache@v1
-      with:
-        path: /home/runner/bundle
-        key: bundle-${{ matrix.ruby }}-${{ hashFiles('../Gemfile') }}-${{ hashFiles('**/*.gemspec') }}
-        restore-keys: |
-          bundle-${{ matrix.ruby }}-
+#    - uses: actions/cache@v1
+#      with:
+#        path: /home/runner/bundle
+#        key: bundle-${{ matrix.ruby }}-${{ hashFiles('../Gemfile') }}-${{ hashFiles('**/*.gemspec') }}
+#        restore-keys: |
+#          bundle-${{ matrix.ruby }}-
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
