@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    raki (0.0.3)
+    raki (0.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -174,7 +174,7 @@ DEPENDENCIES
   minitest-global_expectations (~> 1)
   observr
   rails
-  rake (~> 13)
+  rake (~> 13.0.1)
   raki!
   rubocop
   simplecov

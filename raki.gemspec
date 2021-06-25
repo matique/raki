@@ -22,10 +22,10 @@ Gem::Specification.new do |s|
   s.email = 'dittmar.krall@matique.de'
   s.homepage = 'https://matique.com'
 
-  s.required_ruby_version = '>= 2.6'
+#  s.required_ruby_version = '>= 2.6'
 
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'rake', '~> 13'
+  s.add_development_dependency 'rake', '~> 13.0.1'
   s.add_development_dependency 'minitest', '~> 5.0'
   s.add_development_dependency 'minitest-global_expectations', '~> 1'
 end
