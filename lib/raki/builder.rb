@@ -9,7 +9,7 @@ module Raki
     def initialize(default_app = nil, &block)
       @added = []
       @runs = [default_app].compact
-      instance_eval(&block) if block_given?
+      instance_eval(&block) if block
     end
 
     # Create a new Raki::Builder instance and return the Raki application
