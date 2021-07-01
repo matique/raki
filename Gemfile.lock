@@ -170,11 +170,11 @@ PLATFORMS
 DEPENDENCIES
   bundler
   crimp
-  minitest (~> 5.0)
-  minitest-global_expectations (~> 1)
+  minitest
+  minitest-global_expectations
   observr
   rails
-  rake (~> 13.0.1)
+  rake
   raki!
   rubocop
   simplecov
