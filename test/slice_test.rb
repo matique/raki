@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 describe Raki::Slice do
   let(:env) { {a: 1, b: 2} }
@@ -11,7 +11,7 @@ describe Raki::Slice do
       run lambda { |env| [200, env, []] }
     end
 
-    assert_equal [200, {:a=>1}, []], app.call(env)
+    assert_equal [200, {a: 1}, []], app.call(env)
   end
 
   def test_slice_a_b
@@ -20,7 +20,7 @@ describe Raki::Slice do
       run lambda { |env| [200, env, []] }
     end
 
-    assert_equal [200, {:a=>1, b: 2}, []], app.call(env)
+    assert_equal [200, {a: 1, b: 2}, []], app.call(env)
   end
 
   def test_slice_array
@@ -29,7 +29,7 @@ describe Raki::Slice do
       run lambda { |env| [200, env, []] }
     end
 
-    assert_equal [200, {:a=>1, b: 2}, []], app.call(env)
+    assert_equal [200, {a: 1, b: 2}, []], app.call(env)
   end
 
   def test_slice_nothing
@@ -50,5 +50,4 @@ describe Raki::Slice do
 
     assert_equal [200, {b: 2}, []], app.call(env)
   end
-
 end

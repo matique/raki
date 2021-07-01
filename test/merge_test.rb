@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 describe Raki::Merge do
   let(:env) { {a: 1, b: 2} }
@@ -11,7 +11,7 @@ describe Raki::Merge do
       run lambda { |env| [200, env, []] }
     end
 
-    assert_equal [200, {:a=>1}, []], app.call({})
+    assert_equal [200, {a: 1}, []], app.call({})
   end
 
   def test_merge_a_b
@@ -20,7 +20,7 @@ describe Raki::Merge do
       run lambda { |env| [200, env, []] }
     end
 
-    assert_equal [200, {:a=>1, b: 2}, []], app.call({})
+    assert_equal [200, {a: 1, b: 2}, []], app.call({})
   end
 
   def test_merge_adding
@@ -29,7 +29,7 @@ describe Raki::Merge do
       run lambda { |env| [200, env, []] }
     end
 
-    assert_equal [200, {:a=>1, b: 2}, []], app.call(a: 1)
+    assert_equal [200, {a: 1, b: 2}, []], app.call(a: 1)
   end
 
   def test_merge_nothing

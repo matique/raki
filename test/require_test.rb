@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 describe Raki::Require do
   let(:env) { {a: 1, b: 2} }
@@ -11,7 +11,7 @@ describe Raki::Require do
       run lambda { |env| [200, env, []] }
     end
 
-   app.call(env)
+    app.call(env)
   end
 
   def test_require_nothing
@@ -21,6 +21,6 @@ describe Raki::Require do
     end
 
     err = assert_raises(Raki::RequireError) { app.call(env) }
-    assert_equal 'Expected <>', err.message
+    assert_equal "Expected <>", err.message
   end
 end

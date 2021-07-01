@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 describe Raki::Builder do
   let(:raki_nil) { Raki::Nil.new }
@@ -10,15 +10,15 @@ describe Raki::Builder do
     app = Raki::Builder.new
 
     assert_kind_of Raki::Builder, app
-    assert_raises() { app.call({}) }
+    assert_raises { app.call({}) }
   end
 
   def test_builder_lambda
     app = Raki::Builder.app do
-      run lambda { |env| [200, {}, ['OK']] }
+      run lambda { |env| [200, {}, ["OK"]] }
     end
 
-    expected = [200, {}, ['OK']]
+    expected = [200, {}, ["OK"]]
     assert_equal expected, app.call(nil)
   end
 

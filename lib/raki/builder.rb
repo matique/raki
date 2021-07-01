@@ -19,7 +19,7 @@ module Raki
     end
 
     def add(middleware, *args, &block)
-      raise 'No add allowed after a run' if @runs.size.positive?
+      raise "No add allowed after a run" if @runs.size.positive?
 
       @added <<
         if middleware.instance_of?(Class)
@@ -39,7 +39,8 @@ module Raki
       @added.reverse.inject(app) { |a, e| e[a] }
     end
 
-   private
+    private
+
     def fake_parallel(runs)
       return runs.first if runs.size < 2
 

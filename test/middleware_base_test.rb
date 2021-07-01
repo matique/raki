@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class MB < Raki::MiddlewareBase
 end
@@ -14,7 +14,7 @@ describe Raki::MiddlewareBase do
   end
 
   def test_call
-    err = assert_raises() { rr.call({}) }
-    assert_equal '#call must be overwritten by a middleware raki', err.message
+    err = assert_raises { rr.call({}) }
+    assert_equal "#call must be overwritten by a middleware raki", err.message
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 describe Raki::Block do
   let(:env) { {a: 1, b: 2} }
@@ -16,7 +16,7 @@ describe Raki::Block do
   end
 
   def test_no_block
-    assert_raises() {
+    assert_raises {
       Raki::Builder.app do
         add(Raki::Block)
       end.call({})

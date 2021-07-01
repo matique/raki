@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'crimp'
+require "crimp"
 
 # not yet finished
 # requires a Rails environment! (see Rails below)
@@ -15,7 +15,8 @@ module Raki
       }
     end
 
-   private
+    private
+
     def kache(key, &block)
       # raise 'Missing Rails environment' unless defined?(Rails.cache)
       return yield unless defined?(Rails.cache)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 # must be tested in a Rails environment
 # Test is somehow faked
@@ -18,5 +18,4 @@ describe Raki::Cache do
     result2 = app.call({})
     assert_equal result1, result2
   end
-
 end

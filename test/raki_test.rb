@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 describe Raki::Nil do
   let(:raki) { Raki::Nil.new }
   let(:empty) { [200, {}, []] }
-  let(:ping) { [200, {}, ['ping']] }
+  let(:ping) { [200, {}, ["ping"]] }
 
   def test_class
     assert_instance_of Raki::Nil, raki
@@ -19,7 +19,7 @@ describe Raki::Nil do
   end
 
   def test_ping
-    proc = lambda { |env| [200, {}, ['ping']] }
+    proc = lambda { |env| [200, {}, ["ping"]] }
     assert_equal ping, proc.call({})
   end
 end

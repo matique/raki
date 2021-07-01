@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class RR
   def initialize(*args, &block)
@@ -18,7 +18,7 @@ class RR
   end
 end
 
-describe Raki::Builder, 'Parameter' do
+describe Raki::Builder, "Parameter" do
   let(:env) { {a: 1, b: 2} }
 
   def test_filter_nothing
@@ -26,7 +26,7 @@ describe Raki::Builder, 'Parameter' do
       add RR.new
     end
 
-    assert_equal [200, {:a=>1, :b=>2}, []], app.call(env)
+    assert_equal [200, {a: 1, b: 2}, []], app.call(env)
   end
 
   def test_filter_a
@@ -34,12 +34,12 @@ describe Raki::Builder, 'Parameter' do
       add RR.new(:a)
     end
 
-    assert_equal [200, {:b=>2}, [env[:a]]], app.call(env)
+    assert_equal [200, {b: 2}, [env[:a]]], app.call(env)
   end
 
   def test_filter_with_block
     app = Raki::Builder.app do
-      add(RR.new { |env| '123' })
+      add(RR.new { |env| "123" })
     end
 
     assert_equal [200, "123", []], app.call(env)

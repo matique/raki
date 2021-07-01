@@ -10,7 +10,7 @@ module Raki
     end
 
     def call(_env)
-      raise '#call must be overwritten by a middleware raki'
+      raise "#call must be overwritten by a middleware raki"
     end
   end
 end
