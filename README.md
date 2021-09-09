@@ -28,10 +28,10 @@ The header keys must be Strings.
 
 The header must not contain a Status key.
 The header must conform to RFC7230 token specification,
-i.e. cannot contain non-printable ASCII, DQUOTE or ‚(),/:;<=>?@[]{}‚.
+i.e. cannot contain non-printable ASCII, DQUOTE or √¢(),/:;<=>?@[]{}√¢.
 The values of the header must be Strings,
 consisting of lines (for multiple header values,
-e.g. multiple Set-Cookie values) separated by ‚\n‚.
+e.g. multiple Set-Cookie values) separated by √¢\n√¢.
 The lines must not contain characters below 037.
 
 ### The Content-Type
@@ -78,3 +78,5 @@ gem 'raki'
 Heavily inspired by Rack.
 
 Raki is released under the MIT License.
+
+[Code of Conduct](https://github.com/matique/matique/blob/main/CODE_OF_CONDUCT.md)
