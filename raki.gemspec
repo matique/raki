@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
     Raki is under construction
   EOF
 
+  s.metadata["source_code_uri"] = "https://github.com/matique/raki"
+
   s.files = Dir.glob("lib/**/*") + %w[README.md LICENSE]
 
   s.require_path = "lib"
