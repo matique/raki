@@ -2,11 +2,11 @@
 
 # Middleware Slice.
 module Raki
-  class Slice < Raki::MiddlewareBase
+  class Slice < Raki::Middleware
     def call(env)
       my_env = env.slice(*@args.flatten)
-      @block&.call(my_env)
-      @app.call(my_env)
+      app = @block || @app
+      app.call(my_env)
     end
   end
 end

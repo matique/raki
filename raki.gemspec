@@ -6,12 +6,18 @@ Gem::Specification.new do |s|
   s.name = "raki"
   s.version = Raki::VERSION
   s.platform = Gem::Platform::RUBY
-  s.summary = "A modular hash interface."
+  s.summary = "Kind of chaining objects"
   s.license = "MIT"
 
   s.description = <<~EOF
-    Raki is under construction
+    Raki enables chaining of objects.
+    It is based on the definition of an interface and
+    some builders.
+
+    Chained Rakis must conforms to the Raki definition.
   EOF
+
+  s.metadata["source_code_uri"] = "https://github.com/matique/raki"
 
   s.files = Dir.glob("lib/**/*") + %w[README.md LICENSE]
 
@@ -20,8 +26,6 @@ Gem::Specification.new do |s|
   s.author = "Dittmar Krall"
   s.email = "dittmar.krall@matique.de"
   s.homepage = "https://matique.com"
-
-  #  s.required_ruby_version = '>= 2.6'
 
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"

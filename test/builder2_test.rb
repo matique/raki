@@ -1,30 +1,68 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-describe Raki::Builder, "Parallel" do
-  def test_builder_collects_hash
-    app = Raki::Builder.app do
-      run lambda { |env| [200, {a: 111}, []] }
-      #      run lambda { |env| [200, {b: 2222}, []] }
-      #      run Raki::Nil.new
-      run lambda { |env| [200, {}, []] }
+class MW < Raki::Middleware
+  def call(env)
+    result = env + @args.first
+    return result unless @app
+
+    @app.call(result)
+  end
+end
+
+describe Raki::Builder do
+  def setup
+    @app_lm = Raki::Builder.new do
+      add MW, "l"
+      add MW, "m"
     end
 
-    expected = [200, {a: 111}, []]
-    assert_equal expected, app.call(nil)
+    @app_ml = Raki::Builder.new do
+      add MW, "m"
+      add MW, "l"
+    end
   end
 
-  def test_builder_collects_body
-    app = Raki::Builder.app do
-      run lambda { |env| [200, {}, ["one"]] }
-      run lambda { |env| [200, {}, ["two"]] }
+  def test_simple1
+    app_lm = @app_lm # @app_lm not accessible in closure
+    app = Raki::Builder.new do
+      add app_lm
     end
 
-    status, hsh, body = app.call(nil)
-    assert_equal 200, status
-    assert_empty hsh
-    assert body.include?("one")
-    assert body.include?("two")
+    assert_equal "lm", app.call("")
+  end
+
+  def test_simple2
+    app_ml = @app_ml
+    app = Raki::Builder.new do
+      add app_ml
+    end
+
+    assert_equal "ml", app.call("")
+  end
+
+  def test_readme
+    app = Raki::Builder.new do
+      add MW, "a"
+      add MW, "b"
+    end
+
+    assert_equal "ab", app.call("")
+  end
+
+  def test_nested_build_chain
+    app_ml = @app_ml
+    app_lm = @app_lm
+    app2 = Raki::Chain.new do
+      add app_lm
+      add app_ml
+    end
+    assert_equal "lmml", app2.call("")
+
+    app = Raki::Chain.new do
+      add app2
+      add app2
+    end
+
+    assert_equal "lmmllmml", app.call("")
   end
 end

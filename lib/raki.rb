@@ -1,15 +1,25 @@
 # frozen_string_literal: true
 
 module Raki
-  autoload :Block, "raki/block"
   autoload :Builder, "raki/builder"
-  autoload :Cache, "raki/cache"
+  autoload :Chain, "raki/chain"
   autoload :Idem, "raki/idem"
   autoload :Lint, "raki/lint"
   autoload :Merge, "raki/merge"
-  autoload :MiddlewareBase, "raki/middleware_base"
-  autoload :Nil, "raki/nil"
+  autoload :Middleware, "raki/middleware"
   autoload :Params, "raki/params"
   autoload :Require, "raki/require"
   autoload :Slice, "raki/slice"
+
+  ZERO = {body: []}
+
+  class Base
+    def initialize(*args)
+      @args = args
+    end
+
+    def call(env)
+      ZERO
+    end
+  end
 end

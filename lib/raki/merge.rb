@@ -2,11 +2,11 @@
 
 # Middleware Merge.
 module Raki
-  class Merge < Raki::MiddlewareBase
+  class Merge < Raki::Middleware
     def call(env)
       my_env = env.merge(*@args)
-      @block&.call(my_env)
-      @app.call(my_env)
+      app = @block || @app
+      app.call(my_env)
     end
   end
 end

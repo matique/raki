@@ -3,24 +3,16 @@
 require "test_helper"
 
 describe Raki::Require do
-  let(:env) { {a: 1, b: 2} }
+  let(:hsh) { {a: 1, b: 2} }
 
-  def test_require
-    app = Raki::Builder.app do
-      add(Raki::Require, :a, :b)
-      run lambda { |env| [200, env, []] }
-    end
-
-    app.call(env)
+  def test_run
+    app = Raki::Require.new(:a, :b) { |hsh| hsh }
+    app.call(hsh)
   end
 
-  def test_require_nothing
-    app = Raki::Builder.app do
-      add(Raki::Require)
-      run lambda { |env| [200, env, []] }
-    end
-
-    err = assert_raises(Raki::RequireError) { app.call(env) }
+  def test_no_param
+    app = Raki::Require.new { |hsh| hsh }
+    err = assert_raises(Raki::RequireError) { app.call(hsh) }
     assert_equal "Expected <>", err.message
   end
 end

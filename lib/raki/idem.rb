@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-# Middleware just passing over or returning the params.
+# Rreturns "env" (doing nothing)
 module Raki
-  class Idem < Raki::MiddlewareBase
+  class Idem < Raki::Middleware
     def call(env)
-      return env unless @app
-
-      @block&.call(env)
-      @app.call(env)
+      env
     end
   end
 end

@@ -3,61 +3,44 @@
 require "test_helper"
 
 describe Raki::Merge do
-  let(:env) { {a: 1, b: 2} }
+  let(:hsh) { {a: 1, b: 2} }
 
   def test_merge_a
-    app = Raki::Builder.app do
-      add Raki::Merge, a: 1
-      run lambda { |env| [200, env, []] }
-    end
-
-    assert_equal [200, {a: 1}, []], app.call({})
+    app = Raki::Merge.new(a: 1) { |hsh| hsh }
+    assert_equal({a: 1}, app.call({}))
   end
 
   def test_merge_a_b
-    app = Raki::Builder.app do
-      add Raki::Merge, a: 1, b: 2
-      run lambda { |env| [200, env, []] }
-    end
-
-    assert_equal [200, {a: 1, b: 2}, []], app.call({})
+    app = Raki::Merge.new(a: 1, b: 2) { |hsh| hsh }
+    assert_equal({a: 1, b: 2}, app.call({}))
   end
 
   def test_merge_adding
-    app = Raki::Builder.app do
-      add Raki::Merge, b: 2
-      run lambda { |env| [200, env, []] }
-    end
-
-    assert_equal [200, {a: 1, b: 2}, []], app.call(a: 1)
+    app = Raki::Merge.new(b: 2) { |hsh| hsh }
+    assert_equal({a: 1, b: 2}, app.call(a: 1))
   end
 
   def test_merge_nothing
-    app = Raki::Builder.app do
-      add Raki::Merge
-      run lambda { |env| [200, env, []] }
-    end
-
-    assert_equal [200, {a: 1, b: 2}, []], app.call(env)
+    app = Raki::Merge.new({}) { |hsh| hsh }
+    assert_equal({a: 1, b: 2}, app.call(hsh))
   end
 
-  def test_merge_twice
-    app = Raki::Builder.app do
+  def test_chained
+    app = Raki::Builder.new do
       add Raki::Merge, a: 1
       add Raki::Merge, b: 2
-      run lambda { |env| [200, env, []] }
+      add Raki::Idem
     end
 
-    assert_equal [200, {a: 1, b: 2}, []], app.call({})
+    assert_equal({a: 1, b: 2}, app.call(hsh))
   end
 
   def test_merge_with_block
     n = 3
-    app = Raki::Builder.app do
-      add(Raki::Merge) { |env| env[:c] = n }
-      run lambda { |env| [200, env, []] }
-    end
-
-    assert_equal [200, {c: 3}, []], app.call({})
+    app = Raki::Merge.new({}) { |hsh|
+      hsh[:c] = n
+      hsh
+    }
+    assert_equal({c: 3}, app.call({}))
   end
 end

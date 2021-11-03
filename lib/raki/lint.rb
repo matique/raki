@@ -1,28 +1,17 @@
 # frozen_string_literal: true
 
-# Raki::AssertRequest validates your requests according to Raki spec.
-
-# see also:
-# cat ~/test/rack/lib/rack/lint.rb
-# cat ~/test/rack/SPEC.rdoc
+# validates according to Raki definition.
 module Raki
   class LintError < RuntimeError; end
 
-  class Lint < Raki::MiddlewareBase
+  class Lint < Raki::Middleware
     def call(env)
       assert("No env given") { env }
-      assert("Block complained") { @block.call(env) } if @block
+      # assert("Run complained") { @block.call(env) } if @block
 
-      @block&.call(env)
-      response = @app.call(env)
-
-      assert("Expected array") { response.instance_of?(Array) }
-      assert("Expected array of 3 items") { response.size == 3 }
-      assert("First item must be an Integer") { response[0].instance_of?(Integer) }
-      assert("Second item must be a Hash") { response[1].instance_of?(Hash) }
-      assert("Third item must be an Array") { response[2].instance_of?(Array) }
-
-      response
+      result = @app&.call(env)
+      assert("Expected hash") { result.instance_of?(Hash) }
+      result
     end
 
     private

@@ -1,47 +1,58 @@
-# frozen_string_literal: true
-
 require "test_helper"
 
-class RR
-  def initialize(*args, &block)
-    @args = args
-    @block = block
-  end
-
+class RR < Raki::Middleware
   def call(env)
     hsh = env.dup
-    deleted = []
-    @args.each { |arg| deleted << hsh.delete(arg) }
-    hsh = @block.call(env) if @block
+    result = []
+    @args.each { |arg| result << hsh.delete(arg) }
+    result = @block.call(env) if @block
+    return result unless @app
 
-    [200, hsh, deleted]
+    result + @app.call(env)
   end
 end
 
 describe Raki::Builder, "Parameter" do
   let(:env) { {a: 1, b: 2} }
 
-  def test_filter_nothing
-    app = Raki::Builder.app do
-      add RR.new
+  def test_nil
+    app = Raki::Builder.new do
+      add RR
     end
 
-    assert_equal [200, {a: 1, b: 2}, []], app.call(env)
+    assert_equal [], app.call(env)
   end
 
-  def test_filter_a
-    app = Raki::Builder.app do
-      add RR.new(:a)
+  def test_a
+    app = Raki::Builder.new do
+      add RR, :a
     end
 
-    assert_equal [200, {b: 2}, [env[:a]]], app.call(env)
+    assert_equal [env[:a]], app.call(env)
   end
 
-  def test_filter_with_block
-    app = Raki::Builder.app do
-      add(RR.new { |env| "123" })
+  def test_a_b
+    app = Raki::Builder.new do
+      add RR, :a, :b
     end
 
-    assert_equal [200, "123", []], app.call(env)
+    assert_equal [1, 2], app.call(env).sort
+  end
+
+  def test_chained
+    app = Raki::Builder.new do
+      add RR, :a
+      add RR, :b
+    end
+
+    assert_equal [1, 2], app.call(env).sort
+  end
+
+  def test_with_block
+    app = Raki::Builder.new do
+      add(RR) { |env| "123" }
+    end
+
+    assert_equal "123", app.call(env)
   end
 end
