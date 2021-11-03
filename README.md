@@ -1,62 +1,133 @@
-# raki
+# Raki
 [![Gem Version](https://badge.fury.io/rb/raki.png)](http://badge.fury.io/rb/raki)
 
-Under heavy construction
+The Raki specification enables a kind of piping objects.
 
+The composing is done by Raki::Chain and Raki::Builder.
 
 ## Specification
 
-A Raki is a Ruby object (not a class) that responds to call.
-It takes exactly one argument, the environment and returns an Array of
-exactly three values: The status, the headers, and the body.
+A Raki is a Ruby object (not a class) that responds to "call".
+It takes exactly one argument, a Hash, and returns a result, again a Hash.
 
-### The Environment
+Rakis are stackable due to the generality of its argument and result.
 
-The environment must be a frozen instance of Hash.
+Sometimes it is expected that a Raki delivers an array of strings as
+part of the result.
+The convention is that this array is accessed as "result[:body]".
 
-## The Response
+## Simple Raki
 
-### The Status
+A simple Raki (a proc/lambda can be a Raki):
 
-This is an HTTP status. It must be an Integer greater than or equal to 100.
+~~~
+raki = ->(hsh) { {body: ["Hello World!"]} }
+~~~
 
-### The Headers
+and a little more complex:
 
-The header must respond to each, and yield values of key and value.
+~~~
+raki = ->(hsh) { {body: ["Hi #{hsh[:name]!", "Nice to meet you."] } }
+~~~
 
-The header keys must be Strings.
+## Middleware
 
-The header must not contain a Status key.
-The header must conform to RFC7230 token specification,
-i.e. cannot contain non-printable ASCII, DQUOTE or â(),/:;<=>?@[]{}â.
-The values of the header must be Strings,
-consisting of lines (for multiple header values,
-e.g. multiple Set-Cookie values) separated by â\nâ.
-The lines must not contain characters below 037.
+A Raki::Middleware is a Raki that calls another Raki enabling
+"before" and "after" code, i.e. operations around the second Raki.
 
-### The Content-Type
+A Raki middleware is ready to be stacked.
 
-There must not be a Content-Type, when the Status is 1xx, 204 or 304.
-The Content-Length
+A sample for a Raki middleware:
 
-There must not be a Content-Length header when the Status is 1xx, 204 or 304.
+~~~~
+# already included in "gem raki"
+module Raki
+  class Middleware
+    def initialize(app)
+      @app = app
+    end
+  end
+end
 
-### The Body
 
-The Body must respond to each and must only yield String values.
+# your sample
+class SampleMiddleware < Raki::Middleware
+  def call(env)
+    # do something before
+    result = @app.call(env) # if @app
+    # do something after
+    result[:body] << "My grain of salt."
+    result
+  end
+end
+~~~~
 
-If the Body responds to close, it will be called after iteration.
-If the body is replaced by a middleware after action,
-the original body must be closed first, if it responds to close.
+## Composing
 
-If the Body responds to to_path,
-it must return a String identifying the location of a file
-whose contents are identical to that produced by calling each;
-this may be used by the server as an alternative,
-possibly more efficient way to transport the response.
+### Raki::Chain
 
-The Body commonly is an Array of Strings,
-the application instance itself, or a File-like object.
+Raki::Chain chains Rakis.
+In particular, it will forward the result of a previous Raki
+as the argument of the next one.
+The argument for the first Raki is the arguent of the "call".
+The return value is the result of the last Raki.
+
+A sample:
+
+~~~
+class Cl < Raki::Base
+  def call(env)
+    env + @args.first
+  end
+end
+
+proca = ->(env) { env + "a" }
+app = Raki::Chain.new do
+  add Cl, "C"
+  add proca
+  add { |env| env + "b" }
+  add ->(env) { env + "c" }
+end
+
+app.call("") # --> "Cabc"
+~~~
+
+### Raki::Builder
+
+Raki::Builder chains Raki::Middleware.
+In particular, the "@app" is initialized for each middleware.
+The last middleware "@app" is initialized to "nil".
+
+It is expected that each middleware takes care to call the next one.
+
+A sample:
+
+~~~
+class MW < Raki::Middleware
+  def call(env)
+    result = env + @args.first
+    return result unless @app
+
+    @app.call(result)
+  end
+end
+
+app = Raki::Builder.new do
+  add MW, "a"
+  add MW, "b"
+end
+
+app.call("") # --> "ab"
+
+~~~
+
+### Recommendations
+
+Implement a Raki as idempotent, i.e. same arguments delivers same results.
+
+It is always a good idea to avoid side-effects.
+
+Frozen arguments may avoid some strange behaviour.
 
 ## Installation
 
