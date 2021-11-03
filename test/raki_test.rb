@@ -1,10 +1,6 @@
 require "test_helper"
 
-class ZZ < Raki::Base
-
-end
-
-describe Raki do
+describe Raki::Base do
   let(:base) { Raki::Base.new }
 
   def test_zero
