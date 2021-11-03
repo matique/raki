@@ -1,11 +1,17 @@
 require "test_helper"
 
+class ZZ < Raki::Base
+
+end
+
 describe Raki do
-  let(:empty) { {body: []} }
-  let(:hello) { {body: ["Hello World!"]} }
-  let(:raki) { Raki::Raki.new }
+  let(:base) { Raki::Base.new }
 
   def test_zero
     assert Raki::ZERO
+  end
+
+  def test_coverage
+    assert Raki::ZERO, base.call("")
   end
 end
