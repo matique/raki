@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
   s.require_path = "lib"
 
   s.author = "Dittmar Krall"
-  s.email = "dittmar.krall@matique.de"
-  s.homepage = "https://matique.com"
+  s.email = "dittmar.krall@matiq.com"
+  s.homepage = "https://matiq.com"
 
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
