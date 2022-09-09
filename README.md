@@ -39,7 +39,7 @@ A Raki middleware is ready to be stacked.
 
 A sample for a Raki middleware:
 
-~~~~
+~~~ruby
 # already included in "gem raki"
 module Raki
   class Middleware
@@ -60,7 +60,7 @@ class SampleMiddleware < Raki::Middleware
     result
   end
 end
-~~~~
+~~~
 
 ## Composing
 
