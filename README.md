@@ -5,6 +5,15 @@ The Raki specification enables a kind of piping objects.
 
 The composing is done by Raki::Chain and Raki::Builder.
 
+## Installation
+
+As usual:
+```ruby
+# Gemfile
+gem "raki"
+```
+and run "bundle install".
+
 ## Specification
 
 A Raki is a Ruby object (not a class) that responds to "call".
@@ -129,25 +138,11 @@ It is always a good idea to avoid side-effects.
 
 Frozen arguments may avoid some strange behaviour.
 
-## Installation
-
-Install the gem:
-
-~~~
-gem install raki
-~~~
-
-Or in your Gemfile:
-
-~~~
-# Gemfile
-gem 'raki'
-~~~
-
 ## Miscellaneous
 
 Heavily inspired by Rack.
 
-Raki is released under the MIT License.
+Copyright (c) 2020-2022 Dittmar Krall (www.matiq.com),
+released under the MIT license:
 
-[Code of Conduct](https://github.com/matique/matique/blob/main/CODE_OF_CONDUCT.md)
+* https://opensource.org/licenses/MIT
