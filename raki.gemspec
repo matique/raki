@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.email = "dittmar.krall@matiq.com"
   s.homepage = "https://matiq.com"
 
-  s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
   s.add_development_dependency "minitest"
   s.add_development_dependency "minitest-global_expectations"
