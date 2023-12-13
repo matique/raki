@@ -1,5 +1,6 @@
 # Raki
 [![Gem Version](https://badge.fury.io/rb/raki.png)](http://badge.fury.io/rb/raki)
+[![GEM Downloads](https://img.shields.io/gem/dt/raki?color=168AFE&logo=ruby&logoColor=FE1616)](https://rubygems.org/gems/raki)
 
 The Raki specification enables a kind of piping objects.
 
@@ -143,6 +144,4 @@ Frozen arguments may avoid some strange behaviour.
 Heavily inspired by Rack.
 
 Copyright (c) 2020-2023 Dittmar Krall (www.matiq.com),
-released under the MIT license:
-
-* https://opensource.org/licenses/MIT
+released under the [MIT license](https://opensource.org/licenses/MIT).

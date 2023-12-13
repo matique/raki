@@ -8,11 +8,12 @@ module Raki
       instance_eval(&block) if block
     end
 
-    def add(middleware = nil, *args, &block)
+    def add(middleware = nil, *, &block)
       middleware ||= block
       @stack <<
         if middleware.instance_of?(Class)
-          middleware.new(*args, &block)
+          # middleware.new(*args, &block)
+          middleware.new(*, &block)
         else
           middleware
         end

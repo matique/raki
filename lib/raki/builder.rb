@@ -10,10 +10,10 @@ module Raki
       chain
     end
 
-    def add(middleware, *args, &block)
+    def add(middleware, ...)
       @stack <<
         if middleware.instance_of?(Class)
-          middleware.new(*args, &block)
+          middleware.new(...)
         else
           middleware
         end
