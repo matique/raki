@@ -6,7 +6,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "observr"
+  gem "cuco"
   gem "simplecov", require: false
   gem "ricecream"
 end
