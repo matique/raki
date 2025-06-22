@@ -6,10 +6,6 @@
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/standardrb/standard)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://choosealicense.com/licenses/mit/)
 
-[![Gem Version](https://badge.fury.io/rb/raki.png)](http://badge.fury.io/rb/raki)
-[![GEM Downloads](https://img.shields.io/gem/dt/raki?color=168AFE&logo=ruby&logoColor=FE1616)](https://rubygems.org/gems/raki)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://choosealicense.com/licenses/mit/)
-
 The Raki specification enables a kind of piping objects.
 
 The composing is done by Raki::Chain and Raki::Builder.
