@@ -7,6 +7,6 @@ end
 
 group :test do
   gem "cuco"
+  gem "ricecream", require: false
   gem "simplecov", require: false
-  gem "ricecream"
 end

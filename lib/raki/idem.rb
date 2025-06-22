@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Rreturns "env" (doing nothing)
+# Returns "env" (doing nothing)
 module Raki
   class Idem < Raki::Middleware
     def call(env)
