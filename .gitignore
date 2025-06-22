@@ -6,6 +6,5 @@ coverage/
 **/*.log
 **/*.lock
 **/*.sqlite3*
-**/*.sqlite3*
 
 test/internal/tmp/
