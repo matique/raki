@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/matique/raki"
   s.metadata["source_code_uri"] = "https://github.com/matique/raki"
 
-  s.files = Dir.glob("lib/**/*") + %w[README.md LICENSE]
+  s.files = Dir.glob("lib/**/*") + %w[README.md MIT-LICENSE]
   s.require_path = "lib"
-  s.required_ruby_version = "~> 3"
+  s.required_ruby_version = ">= 3"
 
   s.author = "Dittmar Krall"
   s.email = "dittmar.krall@matiq.com"
