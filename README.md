@@ -147,5 +147,5 @@ Frozen arguments may avoid some strange behaviour.
 
 Heavily inspired by Rack.
 
-Copyright (c) 2020-2025 Dittmar Krall (www.matiq.com),
+Copyright (c) 2020-2026 Dittmar Krall (www.matiq.com),
 released under the [MIT license](https://opensource.org/licenses/MIT).
